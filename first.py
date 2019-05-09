@@ -1,3 +1,8 @@
+# necessary packages:
+# numpy
+# jupyter
+# matplotlib
+
 # %% imports
 import numpy as np
 
