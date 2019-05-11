@@ -7,6 +7,8 @@
 # scipy
 
 # possible addition: add possibility to save and load nn
+# improve by ~0.005 by adding rotated training data
+#     create it by reusing mnist training set
 
 
 # %%
@@ -147,6 +149,6 @@ for record in test_data_list:
 
 
 # %%
-# show hit percentile
+# show hit ratio
 score_array = np.asarray(score)
 print(f'performance: {score_array.sum() / score_array.size}')
