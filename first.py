@@ -1,3 +1,5 @@
+# written in IPython for Jupyter notebook
+#
 # necessary packages:
 # numpy
 # jupyter
@@ -128,3 +130,8 @@ for e in range(epochs):
 test_data_file = open('mnist_test_10.csv', 'r')
 test_data_list = test_data_file.readlines()
 test_data_file.close()
+
+
+# %%
+# testing nn
+...
