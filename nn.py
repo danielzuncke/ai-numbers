@@ -12,7 +12,7 @@
 import numpy as np
 import scipy.special as sp
 import matplotlib.pyplot as plt
-%matplotlib inline
+# %matplotlib inline
 
 
 # %%
@@ -38,7 +38,7 @@ class neuralNetwork:
         self.lr = learningrate
 
         # activation function (sigmoind function)
-        self.activation_function = lambda x: sp.expit(x)
+        self.activation_function = lambda x: sp.expit(x)  # pylint: disable=E1101
 
         ...
 
