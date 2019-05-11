@@ -1,0 +1,5 @@
+# ignore data_sets bigger than 100mb #
+######################################
+
+mnist_datasets/mnist_test.csv
+mnist_datasets/mnist_train.csv
