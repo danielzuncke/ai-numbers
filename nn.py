@@ -6,17 +6,19 @@
 # matplotlib
 # scipy
 
+# possible addition: add possibility to save and load nn
+
 
 # %%
 # imports and stuff
 import numpy as np
 import scipy.special as sp
 import matplotlib.pyplot as plt
-# %matplotlib inline
+# %matplotlib inline # not necessary in vscode
 
 
 # %%
-# neural network class definition
+# nn class definition
 class neuralNetwork:
     # init neural network (nn)
     def __init__(self, inputnodes, hiddennodes, outputnodes, learningrate):
@@ -39,8 +41,6 @@ class neuralNetwork:
 
         # activation function (sigmoind function)
         self.activation_function = lambda x: sp.expit(x)  # pylint: disable=E1101
-
-        ...
 
     # train nn
     def train(self, inputs_list, targets_list):
@@ -70,8 +70,6 @@ class neuralNetwork:
             np.dot((hidden_errors * hidden_outputs *
                     (1.0 - hidden_outputs)), np.transpose(inputs))
 
-        ...
-
     # query nn
     def query(self, inputs_list):
         # input list to 2d array
@@ -89,10 +87,9 @@ class neuralNetwork:
 
 
 # %%
-# nn size, learning rate; create nn
-# number of input, hidden and output nodes
+# define size of nn and create it
 input_nodes = 784
-hidden_nodes = 00
+hidden_nodes = 200
 output_nodes = 10
 
 # nn learning rate
@@ -104,34 +101,52 @@ n = neuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
 
 # %%
 # load mnist training dataset
-training_data_file = open('mnist_datasets/mnist_train_100.csv', 'r')
+training_data_file = open('mnist_datasets/mnist_train.csv', 'r')
 training_data_list = training_data_file.readlines()
 training_data_file.close()
 
 
 # %%
 # train nn
-# use training set 5 times
+# use training data 5 times
 epochs = 5
 for e in range(epochs):
-    # cycle through all records in set
+    print(f'epoch {e + 1}')
+    # cycle through training data
     for record in training_data_list:
         all_values = record.split(',')
-        inputs = (np.asfarray(all_values[1:]) / 255.0 * 0.99) + 0.01
+        inputs = (np.asfarray(all_values[1:]) / 256.0 * 0.99) + 0.01
         targets = np.zeros(output_nodes) + 0.01
         targets[int(all_values[0])] = 0.99
         n.train(inputs, targets)
-        ...
-    ...
 
 
 # %%
 # load mnist test dataset
-test_data_file = open('mnist_test_10.csv', 'r')
+test_data_file = open('mnist_datasets/mnist_test.csv', 'r')
 test_data_list = test_data_file.readlines()
 test_data_file.close()
 
 
 # %%
-# testing nn
-...
+# test nn
+# score
+score = []
+
+# cycle through test data
+for record in test_data_list:
+    all_values = record.split(',')
+    correct_label = int(all_values[0])
+    inputs = (np.asfarray(all_values[1:]) / 256.0 * 0.99) + 0.01
+    outputs = n.query(inputs)
+    label = np.argmax(outputs)
+    if (label == correct_label):
+        score.append(1)
+    else:
+        score.append(0)
+
+
+# %%
+# show hit percentile
+score_array = np.asarray(score)
+print(f'performance: {score_array.sum() / score_array.size}')
