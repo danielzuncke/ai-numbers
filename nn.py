@@ -7,14 +7,13 @@
 # scipy
 
 # possible addition: add possibility to save and load nn
-# improve by ~0.005 by adding rotated training data
-#     create it by reusing mnist training set
 
 
 # %%
 # imports and stuff
 import numpy as np
 import scipy.special as sp
+import scipy.ndimage as spimg
 import matplotlib.pyplot as plt
 # %matplotlib inline # not necessary in vscode
 
@@ -95,7 +94,7 @@ hidden_nodes = 200
 output_nodes = 10
 
 # nn learning rate
-learning_rate = 0.1
+learning_rate = 0.01
 
 # create instance of nn
 n = neuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
@@ -111,7 +110,7 @@ training_data_file.close()
 # %%
 # train nn
 # use training data 5 times
-epochs = 5
+epochs = 10
 for e in range(epochs):
     print(f'epoch {e + 1}')
     # cycle through training data
@@ -121,6 +120,14 @@ for e in range(epochs):
         targets = np.zeros(output_nodes) + 0.01
         targets[int(all_values[0])] = 0.99
         n.train(inputs, targets)
+
+        # train with rotated variations (1. anti- 2. clockwise)
+        inputs_plusx_img = spimg.interpolation.rotate(
+            inputs.reshape(28, 28), 10, cval=0.01, order=1, reshape=False)
+        n.train(inputs_plusx_img.reshape(784), targets)
+        inputs_minusx_img = spimg.interpolation.rotate(
+            inputs.reshape(28, 28), -10, cval=0.01, order=1, reshape=False)
+        n.train(inputs_minusx_img.reshape(784), targets)
 
 
 # %%
