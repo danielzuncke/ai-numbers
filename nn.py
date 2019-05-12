@@ -6,12 +6,14 @@
 # matplotlib
 # scipy
 
-# possible addition: add possibility to save and load nn
+
+# to save or load nn, see final two cells
 
 
 # %%
 # imports and stuff
 import numpy as np
+import pickle
 import scipy.special as sp
 import scipy.ndimage as spimg
 import matplotlib.pyplot as plt
@@ -40,8 +42,8 @@ class neuralNetwork:
         # set learning rate
         self.lr = learningrate
 
-        # activation function (sigmoind function)
-        self.activation_function = lambda x: sp.expit(x)  # pylint: disable=E1101
+        # activation function (sigmoind function); commented out to pickle save
+        # self.activation_function = lambda x: sp.expit(x)  # pylint: disable=E1101
 
     # train nn
     def train(self, inputs_list, targets_list):
@@ -51,11 +53,15 @@ class neuralNetwork:
 
         # calculate signals to and from hidden layer
         hidden_inputs = np.dot(self.wih, inputs)
-        hidden_outputs = self.activation_function(hidden_inputs)
+        # changed to be able to pickle save
+        # hidden_outputs = self.activation_function(hidden_inputs)
+        hidden_outputs = sp.expit(hidden_inputs)
 
         # calculate signals to and from output layer
         final_inputs = np.dot(self.who, hidden_outputs)
-        final_outputs = self.activation_function(final_inputs)
+        # changed to be able to pickle save
+        # final_outputs = self.activation_function(final_inputs)
+        final_outputs = sp.expit(final_inputs)
 
         # calculate error and hidden nodes error
         output_errors = targets - final_outputs
@@ -78,11 +84,15 @@ class neuralNetwork:
 
         # calculate signals to and from hidden layer
         hidden_inputs = np.dot(self.wih, inputs)
-        hidden_outputs = self.activation_function(hidden_inputs)
+        # changed to be able to pickle save
+        # hidden_outputs = self.activation_function(hidden_inputs)
+        hidden_outputs = sp.expit(hidden_inputs)
 
         # calculate signals to and from final output layer
         final_inputs = np.dot(self.who, hidden_outputs)
-        final_outputs = self.activation_function(final_inputs)
+        # changed to be able to pickle save
+        # final_outputs = self.activation_function(final_inputs)
+        final_outputs = sp.expit(final_inputs)
 
         return final_outputs
 
@@ -159,3 +169,17 @@ for record in test_data_list:
 # show hit ratio
 score_array = np.asarray(score)
 print(f'performance: {score_array.sum() / score_array.size}')
+
+
+# %%
+# save trained nn
+# with open('trained_nn.pickle', 'wb') as output:
+#     pickle.dump(n, output, pickle.HIGHEST_PROTOCOL)
+...
+
+
+# %%
+# load trained nn
+# with open('trained_nn.pickle', 'rb') as input:
+#     n = pickle.load(input)
+...
