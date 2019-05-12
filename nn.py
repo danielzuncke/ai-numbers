@@ -98,7 +98,7 @@ class neuralNetwork:
 
 
 # %%
-# define size of nn and create it
+# define specs of nn
 input_nodes = 784
 hidden_nodes = 200
 output_nodes = 10
@@ -106,6 +106,8 @@ output_nodes = 10
 # nn learning rate
 learning_rate = 0.01
 
+
+# %%
 # create instance of nn
 n = neuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
 
