@@ -176,12 +176,12 @@ print(f'performance: {score_array.sum() / score_array.size}')
 # %%
 # save trained nn
 # with open('trained_nn.pickle', 'wb') as output:
-#     pickle.dump(n, output, pickle.HIGHEST_PROTOCOL)
+#    pickle.dump(n, output, pickle.HIGHEST_PROTOCOL)
 ...
 
 
 # %%
 # load trained nn
 # with open('trained_nn.pickle', 'rb') as input:
-#     n = pickle.load(input)
+#    n = pickle.load(input)
 ...
