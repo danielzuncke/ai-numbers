@@ -50,9 +50,6 @@ class neuralNetwork:
         # set learning rate
         self.lr = learningrate
 
-        # activation function (sigmoind function); commented out to pickle save
-        # self.activation_function = lambda x: sp.expit(x)  # pylint: disable=E1101
-
     # train nn
     def train(self, inputs_list, targets_list):
         # input lists to 2d arrays
@@ -61,15 +58,11 @@ class neuralNetwork:
 
         # calculate signals to and from hidden layer
         hidden_inputs = np.dot(self.wih, inputs)
-        # changed to be able to pickle save
-        # hidden_outputs = self.activation_function(hidden_inputs)
-        hidden_outputs = sp.expit(hidden_inputs)
+        hidden_outputs = sp.expit(hidden_inputs)  # pylint: disable=E1101
 
         # calculate signals to and from output layer
         final_inputs = np.dot(self.who, hidden_outputs)
-        # changed to be able to pickle save
-        # final_outputs = self.activation_function(final_inputs)
-        final_outputs = sp.expit(final_inputs)
+        final_outputs = sp.expit(final_inputs)  # pylint: disable=E1101
 
         # calculate error and hidden nodes error
         output_errors = targets - final_outputs
@@ -92,15 +85,11 @@ class neuralNetwork:
 
         # calculate signals to and from hidden layer
         hidden_inputs = np.dot(self.wih, inputs)
-        # changed to be able to pickle save
-        # hidden_outputs = self.activation_function(hidden_inputs)
-        hidden_outputs = sp.expit(hidden_inputs)
+        hidden_outputs = sp.expit(hidden_inputs)  # pylint: disable=E1101
 
         # calculate signals to and from final output layer
         final_inputs = np.dot(self.who, hidden_outputs)
-        # changed to be able to pickle save
-        # final_outputs = self.activation_function(final_inputs)
-        final_outputs = sp.expit(final_inputs)
+        final_outputs = sp.expit(final_inputs)  # pylint: disable=E1101
 
         return final_outputs
 
