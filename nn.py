@@ -21,7 +21,6 @@ import matplotlib.pyplot as plt
 
 
 # %%
-# nn class definition
 class neuralNetwork:
     """
     Initialize neural network\n
@@ -50,8 +49,12 @@ class neuralNetwork:
         # set learning rate
         self.lr = learningrate
 
-    # train nn
     def train(self, inputs_list, targets_list):
+        """
+        Train neural network\n
+            input_list: training examples\n
+            targets_list: solutions to examples
+        """
         # input lists to 2d arrays
         inputs = np.array(inputs_list, ndmin=2).T
         targets = np.array(targets_list, ndmin=2).T
@@ -78,8 +81,10 @@ class neuralNetwork:
             np.dot((hidden_errors * hidden_outputs *
                     (1.0 - hidden_outputs)), np.transpose(inputs))
 
-    # query nn
     def query(self, inputs_list):
+        """
+        Use the neural network
+        """
         # input list to 2d array
         inputs = np.array(inputs_list, ndmin=2).T
 
