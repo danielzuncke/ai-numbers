@@ -23,7 +23,15 @@ import matplotlib.pyplot as plt
 # %%
 # nn class definition
 class neuralNetwork:
-    # init neural network (nn)
+    """
+    Initialize neural network\n
+        args: x(int), y(int), z(int), l(float)\n
+        x: number of inputnodes\n
+        y: number of hidden layers\n
+        z: number of outputnodes\n
+        l: learning rate
+    """
+
     def __init__(self, inputnodes, hiddennodes, outputnodes, learningrate):
         # set number of nodes
         self.inodes = inputnodes
