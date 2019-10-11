@@ -1,13 +1,4 @@
 # written in IPython for Jupyter notebook
-#
-# necessary packages:
-# numpy
-# jupyter
-# matplotlib
-# scipy
-
-
-# to save or load nn, see final two cells
 
 
 # %%
@@ -115,8 +106,8 @@ n = neuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
 
 
 # %%
-# load mnist training dataset
-training_data_file = open('mnist_datasets/mnist_train.csv', 'r')
+# load shortened mnist training dataset
+training_data_file = open('mnist_datasets/mnist_train_100.csv', 'r')
 training_data_list = training_data_file.readlines()
 training_data_file.close()
 
@@ -145,8 +136,8 @@ for e in range(epochs):
 
 
 # %%
-# load mnist test dataset
-test_data_file = open('mnist_datasets/mnist_test.csv', 'r')
+# load shortened mnist test dataset
+test_data_file = open('mnist_datasets/mnist_test_10.csv', 'r')
 test_data_list = test_data_file.readlines()
 test_data_file.close()
 
@@ -179,11 +170,14 @@ print(f'performance: {score_array.sum() / score_array.size}')
 # save trained nn
 # with open('trained_nn.pickle', 'wb') as output:
 #    pickle.dump(n, output, pickle.HIGHEST_PROTOCOL)
-...
+# ...
 
 
 # %%
 # load trained nn
 # with open('trained_nn.pickle', 'rb') as input:
 #    n = pickle.load(input)
-...
+# ...
+
+
+# %%
